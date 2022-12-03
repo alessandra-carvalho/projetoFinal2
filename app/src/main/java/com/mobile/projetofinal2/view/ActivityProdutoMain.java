@@ -1,6 +1,5 @@
 package com.mobile.projetofinal2.view;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.mobile.projetofinal2.R;
 import com.mobile.projetofinal2.adapter.AdapterProdutos;
@@ -22,8 +20,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class ActivityProdutoMain extends AppCompatActivity implements View.OnClickListener {
 
     //referencia RecyclerView
     private RecyclerView recyclerview_produtos;
@@ -31,10 +28,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<Produto> produtos;
     private AdapterProdutos adapterProdutos;
 
+    // onCreate ActivityProdutoMain
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_produto_main);
 
         //esconde a barra no cabeçalho
         getSupportActionBar().hide();
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.bt_inserirProduto:
                 //criar a intenção de ir p/ prox activity de cadastro
-                Intent intent = new Intent (this,CadastroProdActivity.class);
+                Intent intent = new Intent (this, ActivityProdutoCadastro.class);
 
                 //parametros
                 intent.putExtra("listaProdutos",this.produtos);
@@ -77,12 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // onActivityResult para receber resultado da activity cadastro produto
     ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-
 
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         //Bundle bundle = result.getData().getExtras();
@@ -94,15 +92,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
             });
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        switch (requestCode){
-//            this.produtos
-//            case 1:
-//        }
-//    }
 }

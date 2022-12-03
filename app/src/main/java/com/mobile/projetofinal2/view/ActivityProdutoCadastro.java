@@ -13,20 +13,20 @@ import com.mobile.projetofinal2.R;
 import com.mobile.projetofinal2.model.Produto;
 import java.util.ArrayList;
 
-public class CadastroProdActivity extends AppCompatActivity implements View.OnClickListener{
+public class ActivityProdutoCadastro extends AppCompatActivity implements View.OnClickListener{
 
     private EditText editText_nome_produto;
     private EditText editText_quant_produto;
     private Button bt_add_produto;
 
-    // referencia ao ArrayList
+    //referencia ao ArrayList Produto
     private ArrayList<Produto> produtos;
 
-    // onCreate CadastroProdActivity
+    //onCreate CadastroProdActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_prod);
+        setContentView(R.layout.activity_produto_cadastro);
 
         this.editText_nome_produto = findViewById(R.id.editText_nome_produto);
         this.editText_quant_produto = findViewById(R.id.editText_quant_produto);
@@ -42,17 +42,11 @@ public class CadastroProdActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    // onClick CadastroProdActivity
+    //onClick CadastroProdActivity
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_add_produto:
-
-                // teste para verificar se produto nulo
-                //Toast.makeText(this,"Adicionar produto!",Toast.LENGTH_SHORT).show();
-
-                //String nome = this.editText_nome_produto.getText().toString();
-                //int qtd_produto = Integer.parseInt(this.editText_quant_produto.getText().toString());
 
                 // valida campos obrigatóris
                 if (!this.editText_nome_produto.getText().toString().equals("")
@@ -77,7 +71,7 @@ public class CadastroProdActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    // insere produtos no lista
+    //insere produtos no lista
     private void adicionarProduto(String nomProduto, int qtdProdutos){
 
             Produto produto = new Produto(nomProduto, qtdProdutos);
@@ -85,7 +79,7 @@ public class CadastroProdActivity extends AppCompatActivity implements View.OnCl
             Toast.makeText(this,"Produto cadastrado com sucesso!",Toast.LENGTH_SHORT).show();
 
             // criar intent de retorno para ser tratada pelo ActivityResult da Main
-            Intent returnIntent = new Intent(this, MainActivity.class);
+            Intent returnIntent = new Intent(this, ActivityProdutoMain.class);
             returnIntent.putExtra("listaProdutosAtualizada",  this.produtos);
             setResult(RESULT_OK, returnIntent);
             finish();

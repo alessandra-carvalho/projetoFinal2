@@ -11,7 +11,6 @@ public class Produto implements Serializable {
 
     }
 
-
     public String getNomeProduto() {
         return nomeProduto;
     }

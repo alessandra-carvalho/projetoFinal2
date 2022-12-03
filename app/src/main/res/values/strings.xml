@@ -2,4 +2,7 @@
     <string name="app_name">projetoFinal2</string>
     <string name="produto_selecionado">Produto Selecionado</string>
     <string name="adicionar_produto">Adicionar Produto</string>
+    <string name="acessar">Acessar</string>
+    <string name="text_cadastro">Novo usuário? Clique aqui</string>
+    <string name="cabeçalho_cadastro">Cadastre-se aqui</string>
 </resources>

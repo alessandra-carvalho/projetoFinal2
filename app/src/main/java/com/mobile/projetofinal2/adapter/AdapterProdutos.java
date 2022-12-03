@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobile.projetofinal2.R;
 import com.mobile.projetofinal2.model.Produto;
-import com.mobile.projetofinal2.view.ProdutoActivity;
+import com.mobile.projetofinal2.view.ActivityProduto;
 import com.mobile.projetofinal2.viewholder.viewHolderProduto;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class AdapterProdutos extends RecyclerView.Adapter<viewHolderProduto> {
     @Override
     public viewHolderProduto onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //infla um novo xml e o atribui p/ um objeto view
-        View view = this.layoutInflater.inflate(R.layout.item_produto,parent,false);
+        View view = this.layoutInflater.inflate(R.layout.activity_produto_item,parent,false);
         return new viewHolderProduto(view);
     }
 
@@ -54,7 +53,7 @@ public class AdapterProdutos extends RecyclerView.Adapter<viewHolderProduto> {
             @Override
             public void onClick(View v) {
                 //criação da intent
-                Intent intent = new Intent(context, ProdutoActivity.class);
+                Intent intent = new Intent(context, ActivityProduto.class);
                 //inserção do objeto referente ao item selecionado na recycler view
                 intent.putExtra("produto",p);
                 //inicialiação da próxima activity
