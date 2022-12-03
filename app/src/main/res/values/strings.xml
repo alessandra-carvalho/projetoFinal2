@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">projetoFinal2</string>
+    <string name="produto_selecionado">Produto Selecionado</string>
+    <string name="adicionar_produto">Adicionar Produto</string>
+</resources>
