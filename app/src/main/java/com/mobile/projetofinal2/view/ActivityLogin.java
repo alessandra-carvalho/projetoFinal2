@@ -21,12 +21,12 @@ public class ActivityLogin extends AppCompatActivity {
 
     private TextView text_cadastro;
 
-    //criando as variaveis
+    // criando as variaveis
     EditText edit_email;
     EditText edit_senha;
     Button bt_acessar;
 
-    //onCreate ActivityLogin
+    // onCreate ActivityLogin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class ActivityLogin extends AppCompatActivity {
         //esconde a barra azul da tela
         getSupportActionBar().hide();
 
-        /* conexão e gestão do banco de dados */
+        // conexão e gestão do banco de dados
         DBUser.abrirBanco(this);
         DBUser.abrirOuCriarTabela(this);
         DBUser.fecharDB();
@@ -114,12 +114,12 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
-    //faz referencia ao id do botão text_cadastro que leva para a próxima tela
+    // faz referencia ao id do botão text_cadastro que leva para a próxima tela
     private void IniciarTelaCadastro(){
         text_cadastro = findViewById(R.id.text_cadastro);
     }
 
-    //método para passar a msg
+    // método para passar a msg
     private void mensagem(String msg){
         Toast.makeText(ActivityLogin.this, msg, Toast.LENGTH_SHORT).show();
         edit_email.requestFocus();

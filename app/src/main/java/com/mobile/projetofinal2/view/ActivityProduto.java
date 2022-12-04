@@ -32,12 +32,10 @@ public class ActivityProduto extends AppCompatActivity {
             //recupera o objeto
             p = (Produto) getIntent().getSerializableExtra("produto");
 
-            // #################################################################
-            // ************* verificar passar para int **************************
-            // #################################################################
             //seta os produtos
             this.textview_nomeProdSelecionado.setText(p.getNomeProduto());
-            this.textview_quantProdSelecionado.setText(" " + String.format("%.2f",p.getQuantProduto()));
+            //this.textview_quantProdSelecionado.setText(p.getQuantProduto());
+            this.textview_quantProdSelecionado.setText(" " + String.format("%.0f",p.getQuantProduto()));
 
         }
     }

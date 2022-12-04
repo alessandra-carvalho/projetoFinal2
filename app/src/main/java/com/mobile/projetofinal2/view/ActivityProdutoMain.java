@@ -12,9 +12,12 @@ import android.widget.Button;
 import com.mobile.projetofinal2.R;
 import com.mobile.projetofinal2.adapter.AdapterProdutos;
 import com.mobile.projetofinal2.model.Produto;
+import com.mobile.projetofinal2.repositorio.ProdutoDAO;
 import com.mobile.projetofinal2.repositorio.Repositorio;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -47,9 +50,14 @@ public class ActivityProdutoMain extends AppCompatActivity implements View.OnCli
         this.recyclerview_produtos.setLayoutManager(linearLayoutManager);
 
         //traz dados do repositorio
-        Repositorio repositorio = new Repositorio();
+        //Repositorio repositorio = new Repositorio();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
         this.produtos = new ArrayList<>();
-        this.produtos = repositorio.buscarProdutos();
+
+        //this.produtos = repositorio.buscarProdutos();
+        this.produtos = produtoDAO.buscarProdutosTodos(ActivityProdutoMain.this);
+
         this.adapterProdutos = new AdapterProdutos(this,this.produtos);
         this.recyclerview_produtos.setAdapter(this.adapterProdutos);
     }

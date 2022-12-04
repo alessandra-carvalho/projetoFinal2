@@ -10,7 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mobile.projetofinal2.R;
+import com.mobile.projetofinal2.database.DBProduto;
 import com.mobile.projetofinal2.model.Produto;
+import com.mobile.projetofinal2.repositorio.ProdutoDAO;
+
 import java.util.ArrayList;
 
 public class ActivityProdutoCadastro extends AppCompatActivity implements View.OnClickListener{
@@ -53,11 +56,11 @@ public class ActivityProdutoCadastro extends AppCompatActivity implements View.O
                         && !this.editText_quant_produto.getText().toString().equals("")) {
 
                     String nome = this.editText_nome_produto.getText().toString();
-                    int qtd_produto = Integer.parseInt(this.editText_quant_produto.getText().toString());
+                    double qtd_produto = Double.parseDouble(this.editText_quant_produto.getText().toString());
 
                     // valida quantidade menor/igual zero
                     if (qtd_produto <= 0){
-                        Toast.makeText(this,"Quantidade precisa ser mair que zero!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"Quantidade precisa ser maior que zero!",Toast.LENGTH_SHORT).show();
                     }else{
                         // invoca método para add produto
                         this.adicionarProduto(nome, qtd_produto);
@@ -72,17 +75,23 @@ public class ActivityProdutoCadastro extends AppCompatActivity implements View.O
     }
 
     //insere produtos no lista
-    private void adicionarProduto(String nomProduto, int qtdProdutos){
+    private void adicionarProduto(String nomProduto, Double qtdProdutos){
 
-            Produto produto = new Produto(nomProduto, qtdProdutos);
-            this.produtos.add(produto);
-            Toast.makeText(this,"Produto cadastrado com sucesso!",Toast.LENGTH_SHORT).show();
+        Produto produto = new Produto(nomProduto, qtdProdutos);
+        this.produtos.add(produto);
+        Toast.makeText(this,"Produto cadastrado com sucesso!",Toast.LENGTH_SHORT).show();
 
-            // criar intent de retorno para ser tratada pelo ActivityResult da Main
-            Intent returnIntent = new Intent(this, ActivityProdutoMain.class);
-            returnIntent.putExtra("listaProdutosAtualizada",  this.produtos);
-            setResult(RESULT_OK, returnIntent);
-            finish();
+        //grava produto usando ProdutoDAO
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtoDAO.salvarProduto(produto, this);
+
+        // criar intent de retorno para ser tratada pelo ActivityResult da Main
+        Intent returnIntent = new Intent(this, ActivityProdutoMain.class);
+        returnIntent.putExtra("listaProdutosAtualizada",  this.produtos);
+        setResult(RESULT_OK, returnIntent);
+        finish();
+
+
 
     }
 }

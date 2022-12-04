@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//classe responsável por manipulação da activity_tela_cadastro
+// classe responsável por manipulação da activity_tela_cadastro
 public class ActivityLoginCadastroUsuario extends AppCompatActivity {
 
     private TextView text_cadastro;
@@ -49,7 +49,7 @@ public class ActivityLoginCadastroUsuario extends AppCompatActivity {
 
     }
 
-    //metodo inserir registro
+    // metodo inserir registro
     public void inserirRegistro(View v){
         String st_nome, st_email, st_senha;
         st_nome = edit_nome.getText().toString();
@@ -100,11 +100,9 @@ public class ActivityLoginCadastroUsuario extends AppCompatActivity {
             mensagem("Por favor, preencha todos os campos!");
         }
 
-
-
     }
 
-    //método para passar a msg
+    // método para passar a msg
     private void mensagem(String msg){
         Toast.makeText(ActivityLoginCadastroUsuario.this, msg, Toast.LENGTH_SHORT).show();
         edit_email.requestFocus();

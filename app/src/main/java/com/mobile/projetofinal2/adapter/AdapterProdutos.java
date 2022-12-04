@@ -40,14 +40,15 @@ public class AdapterProdutos extends RecyclerView.Adapter<viewHolderProduto> {
         return new viewHolderProduto(view);
     }
 
-    //linca os dados com viewHolder que foi criada e position identifica os dados dentro da lista
+    //link para os dados com viewHolder que foi criada e position identifica os dados dentro da lista
     @Override
     public void onBindViewHolder(@NonNull viewHolderProduto holder, int position) {
          Produto p = this.listaProdutos.get(position);
 
         //linca dos dados das listas nas views/produtos e quantidades
         holder.textview_nomeProduto.setText(p.getNomeProduto());
-        holder.textview_quantProduto.setText(" " + String.format("%.2f",p.getQuantProduto()));
+        //holder.textview_quantProduto.setText(p.getQuantProduto());
+        holder.textview_quantProduto.setText(" " + String.format("%.0f",p.getQuantProduto()));
 
         holder.linearLayoutProduto.setOnClickListener(new View.OnClickListener() {
             @Override
