@@ -4,6 +4,7 @@ import com.mobile.projetofinal2.model.Produto;
 
 import java.util.ArrayList;
 
+// repo temporário para testar a interface
 public class Repositorio {
 
     public ArrayList<Produto> buscarProdutos(){

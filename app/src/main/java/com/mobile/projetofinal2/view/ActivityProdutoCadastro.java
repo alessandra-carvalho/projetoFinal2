@@ -91,7 +91,5 @@ public class ActivityProdutoCadastro extends AppCompatActivity implements View.O
         setResult(RESULT_OK, returnIntent);
         finish();
 
-
-
     }
 }

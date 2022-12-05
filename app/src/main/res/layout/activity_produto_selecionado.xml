@@ -46,7 +46,19 @@
              android:textSize="18sp"
              android:textStyle="bold"
              android:textColor="@color/black"
-             android:layout_margin="16dp"/>
+             android:layout_margin="16dp"
+             android:visibility="gone"/>
+
+         <EditText
+             android:id="@+id/edit_text_nomeProduto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="16dp"
+             android:text="Nome do Produto"
+             android:textColor="@android:color/black"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:visibility="gone"/>
 
          <TextView
              android:layout_width="match_parent"
@@ -57,6 +69,8 @@
              android:textColor="@color/black"
              android:layout_margin="16dp"/>
 
+
+
          <TextView
              android:id="@+id/textview_quantProdSelecionado"
              android:layout_width="match_parent"
@@ -65,7 +79,31 @@
              android:textSize="18sp"
              android:textStyle="bold"
              android:textColor="@color/black"
-             android:layout_margin="16dp"/>
+             android:layout_margin="16dp"
+             android:visibility="gone"/>
+
+         <EditText
+             android:id="@+id/edit_text_quantSelecionado"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="5dp"
+             android:textColor="@android:color/black"
+             android:textSize="22sp"
+             android:textStyle="bold"
+             android:visibility="gone" />
+
+         <Button
+             android:id="@+id/btnAlterarProduto"
+             android:layout_width="match_parent"
+             android:layout_height="55dp"
+             android:layout_marginTop="10dp"
+             android:text="Alterar Produto"
+             android:textSize="16sp"
+             android:textColor="@android:color/black"
+             android:background="#F5F5DC" />
+
+
 
      </LinearLayout>
         

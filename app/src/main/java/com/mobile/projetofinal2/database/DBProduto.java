@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,12 +21,12 @@ public class DBProduto {
     static Cursor cursor;
 
     // abrir DB bancoListaCompras
-    public static void abrirBanco(Activity act){
+    public static void abrirBanco(Context context){
         try{
-            ContextWrapper cw= new ContextWrapper(act);
+            ContextWrapper cw= new ContextWrapper(context);
             db=cw.openOrCreateDatabase("bancoListaCompras",MODE_PRIVATE, null);
         }catch (Exception ex){
-            Msg.mostrar("Erro ao abrir banco de dados bancoListaCompras",act);
+            //Msg.mostrar("Erro ao abrir banco de dados bancoListaCompras",context);
         }
     }
 
@@ -35,7 +36,7 @@ public class DBProduto {
     }
 
     // abrir ou criar tabela lista_produtos
-    public static void abrirOuCriarTabela(Activity act){
+    public static void abrirOuCriarTabela(Context context){
 
         //caso a tabela não exista, vai criar
         try{
@@ -43,44 +44,47 @@ public class DBProduto {
         }
         //caso apresente erro
         catch (Exception ex){
-            Msg.mostrar("Erro na criação da tabela lista_produtos!", act);
+            Msg.mostrar("Erro na criação da tabela lista_produtos!", context);
         }
     }
 
     // insert produto
-    public void inserirRegistro(Produto produto, Activity act){
-        abrirBanco(act);
+    public void inserirRegistro(Produto produto, Context context){
+        abrirBanco(context);
         //não estando vazio irá continuar inserindo os dados no BD conforme os campos abaixo
         try{
             db.execSQL("INSERT INTO lista_produtos (nome,quantidade) VALUES ('"+produto.getNomeProduto() +"', '"+produto.getQuantProduto() +"')");
 
         }catch (Exception ex){
-            Msg.mostrar("Erro ao inserir produto!",act);
+            Msg.mostrar("Erro ao inserir produto!",context);
         }
         finally {
-            Msg.mostrar("Produto inserido com sucesso!",act);
+            Msg.mostrar("Produto inserido com sucesso!",context);
         }
         fecharDB();
     }
 
     // delete produto
-    public void apagarRegistro(Produto produto, Activity act){
-        abrirBanco(act);
+    public void apagarRegistro(Produto produto, Context context){
+        abrirBanco(context);
         //não estando vazio irá continuar inserindo os dados no BD conforme os campos abaixo
         try{
 
+            db.delete("lista_produtos", "id = ?", new String[] { String.valueOf(produto.getID()) });
+            db.close();
+
         }catch (Exception ex){
-            Msg.mostrar("Erro ao apgar produto!",act);
+            Msg.mostrar("Erro ao apgar produto!",context);
         }
         finally {
-            Msg.mostrar("Produto apagado com sucesso!",act);
+            Msg.mostrar("Produto apagado com sucesso!",context);
         }
         fecharDB();
     }
 
     // update produto
-    public int atualizarRegistro(Produto produto, Activity act){
-        abrirBanco(act);
+    public int atualizarRegistro(Produto produto, Context context){
+        abrirBanco(context);
 
         int statusUpdate =0;
         //não estando vazio irá continuar inserindo os dados no BD conforme os campos abaixo
@@ -93,10 +97,10 @@ public class DBProduto {
             statusUpdate = db.update("lista_produtos", values, "id = ?", new String[] { String.valueOf(produto.getID()) });
 
         }catch (Exception ex){
-            Msg.mostrar("Erro ao atualizar produto!",act);
+            Msg.mostrar("Erro ao atualizar produto!",context);
         }
         finally {
-            Msg.mostrar("Produto atualizado com sucesso!",act);
+            Msg.mostrar("Produto atualizado com sucesso!",context);
         }
         fecharDB();
 
@@ -105,17 +109,17 @@ public class DBProduto {
     }
 
     //retorna lista de produtos sem fltro
-    public ArrayList<Produto> buscarDadosProdutoTodos(Activity act) {
+    public ArrayList<Produto> buscarDadosProdutoTodos(Context context) {
         ArrayList<Produto> listProduto = new ArrayList<>();
 
         try{
-            abrirBanco(act);
+            abrirBanco(context);
             Cursor cursor = db.rawQuery("SELECT * FROM lista_produtos ", null);
 
             if (cursor.moveToFirst()) {
                 do {
                     Produto objProduto = new Produto();
-                    //objProduto.setID(Integer.parseInt(cursor.getString(0)));
+                    objProduto.setID(Integer.parseInt(cursor.getString(0)));
                     objProduto.setNomeProduto(cursor.getString(1));
                     objProduto.setQuantProduto(Double.parseDouble(cursor.getString(2)));
 
@@ -125,7 +129,7 @@ public class DBProduto {
             }
 
         }catch (Exception ex){
-            Msg.mostrar("Erro ao buscarDadosProduto!",act);
+            Msg.mostrar("Erro ao buscarDadosProduto!",context);
         }
         fecharDB();
 
@@ -134,11 +138,11 @@ public class DBProduto {
     }
 
     //retorna lista de produtos filtrando IDProduto
-    public List<Produto> buscarDadosProduto(int intID, Activity act) {
+    public List<Produto> buscarDadosProduto(int intID, Context context) {
         List<Produto> listProduto = new ArrayList<>();
 
         try{
-            abrirBanco(act);
+            abrirBanco(context);
             Cursor cursor = db.rawQuery("SELECT * FROM lista_produtos WHERE id = '" + intID + "' ", null);
 
             if (cursor.moveToFirst()) {
@@ -154,7 +158,7 @@ public class DBProduto {
             }
 
         }catch (Exception ex){
-            Msg.mostrar("Erro ao buscarDadosProduto!",act);
+            Msg.mostrar("Erro ao buscarDadosProduto!",context);
         }
         fecharDB();
 

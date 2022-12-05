@@ -49,13 +49,9 @@ public class ActivityProdutoMain extends AppCompatActivity implements View.OnCli
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,false);
         this.recyclerview_produtos.setLayoutManager(linearLayoutManager);
 
-        //traz dados do repositorio
-        //Repositorio repositorio = new Repositorio();
+        // gerencia objeto ProdutoDAO
         ProdutoDAO produtoDAO = new ProdutoDAO();
-
         this.produtos = new ArrayList<>();
-
-        //this.produtos = repositorio.buscarProdutos();
         this.produtos = produtoDAO.buscarProdutosTodos(ActivityProdutoMain.this);
 
         this.adapterProdutos = new AdapterProdutos(this,this.produtos);
@@ -75,7 +71,6 @@ public class ActivityProdutoMain extends AppCompatActivity implements View.OnCli
 
                 //chama a activity e obtem uma resposta de quem foi chamado
                 //startActivityForResult(intent,1);
-
 
                 activityResultLaunch.launch(intent);
 

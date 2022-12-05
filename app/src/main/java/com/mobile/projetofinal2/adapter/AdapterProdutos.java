@@ -1,17 +1,19 @@
 package com.mobile.projetofinal2.adapter;
-
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.mobile.projetofinal2.R;
 import com.mobile.projetofinal2.model.Produto;
+import com.mobile.projetofinal2.repositorio.ProdutoDAO;
 import com.mobile.projetofinal2.view.ActivityProduto;
+import com.mobile.projetofinal2.view.ActivityProdutoMain;
 import com.mobile.projetofinal2.viewholder.viewHolderProduto;
 
 import java.util.ArrayList;
@@ -43,14 +45,13 @@ public class AdapterProdutos extends RecyclerView.Adapter<viewHolderProduto> {
     //link para os dados com viewHolder que foi criada e position identifica os dados dentro da lista
     @Override
     public void onBindViewHolder(@NonNull viewHolderProduto holder, int position) {
-         Produto p = this.listaProdutos.get(position);
+         final Produto p = this.listaProdutos.get(position);
 
-        //linca dos dados das listas nas views/produtos e quantidades
+        //link dados com listas nas views/produtos e quantidades
         holder.textview_nomeProduto.setText(p.getNomeProduto());
-        //holder.textview_quantProduto.setText(p.getQuantProduto());
         holder.textview_quantProduto.setText(" " + String.format("%.0f",p.getQuantProduto()));
 
-        holder.linearLayoutProduto.setOnClickListener(new View.OnClickListener() {
+        holder.textview_nomeProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //criação da intent
@@ -59,6 +60,31 @@ public class AdapterProdutos extends RecyclerView.Adapter<viewHolderProduto> {
                 intent.putExtra("produto",p);
                 //inicialiação da próxima activity
                 context.startActivity(intent);
+            }
+        });
+
+        //cria o evento de click nos icone editar
+        holder.img_editProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "editar produto", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //cria o evento de click nos icone excluir
+        holder.img_excluirProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "excluir produto", Toast.LENGTH_SHORT).show();
+
+                ProdutoDAO objProdutoDAO = new ProdutoDAO();
+                objProdutoDAO.apagarProduto(p, context) ;
+
+                listaProdutos.remove(p);
+                notifyDataSetChanged();
+
+
+
             }
         });
     }
@@ -79,4 +105,6 @@ public class AdapterProdutos extends RecyclerView.Adapter<viewHolderProduto> {
         notifyDataSetChanged();
 
     }
+
+
 }
