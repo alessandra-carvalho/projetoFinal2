@@ -31,6 +31,9 @@ public class ActivityProdutoCadastro extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produto_cadastro);
 
+        //esconde a barra no cabeçalho
+        getSupportActionBar().hide();
+
         this.editText_nome_produto = findViewById(R.id.editText_nome_produto);
         this.editText_quant_produto = findViewById(R.id.editText_quant_produto);
         this.bt_add_produto = findViewById(R.id.bt_add_produto);
@@ -42,9 +45,7 @@ public class ActivityProdutoCadastro extends AppCompatActivity implements View.O
         if(getIntent().getExtras() != null){
             this.produtos = (ArrayList<Produto>) getIntent().getSerializableExtra("listaProdutos");
         }
-
     }
-
     //onClick CadastroProdActivity
     @Override
     public void onClick(View view) {

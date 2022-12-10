@@ -13,47 +13,47 @@ import java.util.List;
 public class ProdutoDAO {
 
     // grava produto no DB
-    public void salvarProduto(Produto p, Context context){
+    public void salvarProduto(Produto p, Activity activity){
 
         // conexão e gestão do banco de dados
-        DBProduto.abrirBanco(context);
-        DBProduto.abrirOuCriarTabela(context);
+        DBProduto.abrirBanco(activity);
+        DBProduto.abrirOuCriarTabela(activity);
 
         DBProduto objDBProduto = new DBProduto();
 
         // verifica se é insert ou update
         if (p.getID() > 0){
-            objDBProduto.atualizarRegistro(p, context);
-        }else{objDBProduto.inserirRegistro(p, context);}
+            objDBProduto.atualizarRegistro(p, activity);
+        }else{objDBProduto.inserirRegistro(p, activity);}
 
         //fecha o banco de dados
         DBProduto.fecharDB();
     }
 
     // apagar produto
-    public void apagarProduto(Produto p, Context context){
+    public void apagarProduto(Produto p, Activity activity){
 
         // conexão e gestão do banco de dados
-        DBProduto.abrirBanco(context);
-        DBProduto.abrirOuCriarTabela(context);
+        DBProduto.abrirBanco(activity);
+        DBProduto.abrirOuCriarTabela(activity);
 
         DBProduto objDBProduto = new DBProduto();
-        objDBProduto.apagarRegistro(p, context);
+        objDBProduto.apagarRegistro(p, activity);
 
         //fecha o banco de dados
         DBProduto.fecharDB();
     }
 
     // retorna todos produtos cadastrados
-    public ArrayList<Produto> buscarProdutosTodos(Context context){
+    public ArrayList<Produto> buscarProdutosTodos(Activity activity){
         ArrayList<Produto> listProduto = new ArrayList<>();
 
         // conexão e gestão do banco de dados
-        DBProduto.abrirBanco(context);
-        DBProduto.abrirOuCriarTabela(context);
+        DBProduto.abrirBanco(activity);
+        DBProduto.abrirOuCriarTabela(activity);
         DBProduto objDBProduto = new DBProduto();
 
-        listProduto = objDBProduto.buscarDadosProdutoTodos(context);
+        listProduto = objDBProduto.buscarDadosProdutoTodos(activity);
 
         DBProduto.fecharDB();
 

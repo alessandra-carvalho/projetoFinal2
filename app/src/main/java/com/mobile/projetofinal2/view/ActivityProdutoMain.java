@@ -54,7 +54,8 @@ public class ActivityProdutoMain extends AppCompatActivity implements View.OnCli
         this.produtos = new ArrayList<>();
         this.produtos = produtoDAO.buscarProdutosTodos(ActivityProdutoMain.this);
 
-        this.adapterProdutos = new AdapterProdutos(this,this.produtos);
+        //this.adapterProdutos = new AdapterProdutos(this,this.produtos);
+        this.adapterProdutos = new AdapterProdutos(ActivityProdutoMain.this,this.produtos);
         this.recyclerview_produtos.setAdapter(this.adapterProdutos);
     }
 
@@ -77,7 +78,6 @@ public class ActivityProdutoMain extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
-
     // onActivityResult para receber resultado da activity cadastro produto
     ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
